@@ -16,12 +16,12 @@ public class clientApp {
         boolean stop = false;
 
         try{
-            System.out.println("client come here?");
+            //System.out.println("client come here?");
             while(!stop){
                 
                 sock = new Socket(connInfo[0], Integer.parseInt(connInfo[1]));
                 nioC = new NetworkIO(sock);
-                System.out.println("connect to server at " + sock);
+                //System.out.println("connect to server at " + sock);
                 
                 while(!stop){
 

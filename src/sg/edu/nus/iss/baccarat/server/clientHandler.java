@@ -37,7 +37,7 @@ public class clientHandler implements Runnable{
                         stop = true;                
                         break;
                     }
-                    else if(req.startsWith("login")){   
+                    else if(req.startsWith("login")&& req.split("\\|").length == 3){   
                         String response = BaccaratEngine.login(req.substring(6));
                         if(response.contains("negative")){
                             nio.write(response);
@@ -60,7 +60,7 @@ public class clientHandler implements Runnable{
                             else if(req.startsWith("login")){
                                 nio.write("you had logged in");
                             }
-                            else if(req.startsWith("bet")){
+                            else if(req.startsWith("bet") && req.split("\\|").length == 2){
                                 //System.out.println(BaccaratEngine.bet(req.substring(4)));
                                 nio.write(BaccaratEngine.bet(req.substring(4)));
                             }
