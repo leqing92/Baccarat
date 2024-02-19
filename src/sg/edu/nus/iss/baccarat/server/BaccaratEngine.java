@@ -15,7 +15,7 @@ import java.util.Random;
 public class BaccaratEngine {
 
     private static userData user = new userData();
-    private static File cardFile = new File("1cardSet.txt");
+    private static File cardFile = new File("1cardSet.db");
     private static File remainingCardsFile = new File("cards.db");    
     private static final int ELEMENTS_PER_ROW = 6;
     
@@ -157,8 +157,19 @@ public class BaccaratEngine {
         return output;
     }    
     
+    public static List<String> create1cardSet(){
+        List<String> cardSet = new ArrayList<>();
+        for (int i = 1; i <= 13; i++) {
+            for (int j = 1; j <= 4; j++) {
+                cardSet.add(i + "." + j);
+            }
+        }
+        writeFile(cardFile, cardSet);
+        return cardSet;
+    }
+
     public static List<String> loadDeck(int decksSet){        
-        
+        create1cardSet();
         List <String> deck = loadFile(cardFile);
         List <String> fullDeck = shuffleCard(deck, decksSet);              
         writeFile(remainingCardsFile, fullDeck);
