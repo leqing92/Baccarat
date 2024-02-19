@@ -5,7 +5,6 @@
 *.db
 
 /classes
-**/*.class
 
 .vscode
 

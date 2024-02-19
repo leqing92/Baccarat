@@ -35,7 +35,7 @@ public class clientApp {
                         String req = cons.readLine("Send client command to the server: ");
                         nioC.write(req);
                                                 
-                        System.out.println("Data sent to server");
+                        //System.out.println("Data sent to server");
                     }
                     else if(response.toLowerCase().startsWith("bye")){
                         System.out.println(response);
