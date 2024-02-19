@@ -2,3 +2,10 @@
 
 /bin
 
+*.db
+
+/classes
+**/*.class
+
+.vscode
+

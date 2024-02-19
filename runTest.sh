@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp classes Test
+java -cp classes sg.edu.nus.iss.baccarat.AppTest

@@ -1,3 +1,4 @@
+./src/sg/edu/nus/iss/baccarat/AppTest.java
 ./src/sg/edu/nus/iss/baccarat/client/card.java
 ./src/sg/edu/nus/iss/baccarat/client/clientApp.java
 ./src/sg/edu/nus/iss/baccarat/server/BaccaratEngine.java

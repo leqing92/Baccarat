@@ -28,17 +28,11 @@ public class AppTest {
         BaccaratEngine.bet("500");
 
         assertEquals("true", BaccaratEngine.checkBetValid());
-
-    //     // Assuming user doesn't have sufficient funds
+        
+        BaccaratEngine.adjFund("-600");
+    
+        assertEquals("LQ's fund is insufficient, please adjust your fund.\nCurrent fund = 400", BaccaratEngine.checkBetValid());
          
-    //     user.setFund("50");
-    //     assertEquals("username's fund is insufficient, please adjust your fund.\nCurrent fund = 50", BaccaratEngine.checkBetValid());
-
-    //     // Assuming remaining cards are less than 6
-    //     user.setFund("100");
-    //     List<String> emptyDeck = new ArrayList<>();
-    //     user.setRemainingCards(emptyDeck);
-    //     assertEquals("Remaining card deck is less than 6 cards.\nNew card deck is draw.", BaccaratEngine.checkBetValid());
     }
 }
 

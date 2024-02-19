@@ -43,7 +43,7 @@ public class card {
         }else if(pCardValue > bCardValue && pCardValue >= 6 && bCard.size() == 3){
             output = "Player wins with " + pCardValue + " points";
         }else if(pCardValue < bCardValue && pCardValue >= 6 && pCard.size() == 3){
-            output = "Bankers wins with " + pCardValue + " points";
+            output = "Banker wins with " + pCardValue + " points";
         }
         //either player or banker card value at 6 & 7 only ; either 1 need to draw card
         else if(pCardValue <= 5 && bCardValue <= 5 && pCard.size() == 2 && bCard.size() == 2){

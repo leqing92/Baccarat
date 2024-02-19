@@ -15,7 +15,7 @@ import java.util.Random;
 public class BaccaratEngine {
 
     private static userData user = new userData();
-    private static File cardFile = new File("1cardSet.db");
+    private static File cardFile = new File("1cardSet.txt");
     private static File remainingCardsFile = new File("cards.db");    
     private static final int ELEMENTS_PER_ROW = 6;
     

@@ -8,12 +8,17 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
     javac --source-path src -d classes src/sg/edu/nus/iss/baccarat/server/* 
     ## for client 
     javac --source-path src -d classes src/sg/edu/nus/iss/baccarat/client/* 
+    ## for test    	
+    javac -cp lib/junit-4.13.2.jar;src -d classes src/sg/edu/nus/iss/baccarat/AppTest.java
 
 2. run class file
     ## for server
     java -cp classes sg.edu.nus.iss.baccarat.server.serverApp 12345 4
     ## for client
     java -cp classes sg.edu.nus.iss.baccarat.client.clientApp localhost:12345
+    ## for test
+    java -cp classes;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore sg.edu.nus.iss.baccarat.AppTest
+
 
 3. valid command in client side:
     - login|username|fund(in int)
@@ -23,10 +28,10 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
     - adjust|amount (in int) 
 
 ## how to use the .sh file
-1. make sure the two file (junit-4.12.jar & hamcrest-core-1.3.jar) are exist in lib
-2. run ./compile in git bash to convert all java file to classes file
+1. make sure the two file (junit-4.12.jar & hamcrest-core-1.3.jar) are exist in lib 
+2. run ./compile in git bash to convert all java file to classes file (./compile.sh doesnt work if test file is included) 
 3. update the run server and client .sh file and run by ./filename.sh also
-4. ./runTest.sh to run test file but cannot lerh 
+4. 
 
 ## Folder Structure
 
