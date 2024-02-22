@@ -46,18 +46,11 @@ public class clientApp {
                         System.out.println("Card combination: " + response);
                         String reqAfterDeal = card.checkCard(response);
                         System.out.println("After check card combination: " + reqAfterDeal);
-                        nioC.write(reqAfterDeal);
-                        if(reqAfterDeal.contains("draw")){
-                            String responseAfterDraw = nioC.read();
-                            String reqFinal = card.checkCard(responseAfterDraw);
-                            System.out.println("request final: " + reqFinal);
-                            nioC.write(reqFinal); 
-                        }
+                        nioC.write(reqAfterDeal);                        
                     }
                     else{
                         System.out.println("server: " + response); 
-                    }
-                     
+                    }                     
                 }
             }            
             nioC.close();

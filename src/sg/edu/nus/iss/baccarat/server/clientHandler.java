@@ -25,8 +25,8 @@ public class clientHandler implements Runnable{
             while(!stop){                
                 //nio.write("Welcome to Baccarat game"); 
                 System.out.println("Client connected");
-                while (!stop){  //1st while loop
-                            
+                
+                while (!stop){  //1st while loop                            
                     nio.write(">");                    
                     req = nio.read();
                     System.out.println("client1: " + req);                    
@@ -39,6 +39,7 @@ public class clientHandler implements Runnable{
                     }
                     else if(req.startsWith("login")&& req.split("\\|").length == 3){   
                         String response = BaccaratEngine.login(req.substring(6));
+                        String userName = (req.split("\\|"))[1];
                         if(response.contains("negative")){
                             nio.write(response);
                             break;
@@ -57,8 +58,8 @@ public class clientHandler implements Runnable{
                                 stop = true;                
                                 break;
                             }
-                            else if(req.startsWith("login")){
-                                nio.write("you had logged in");
+                            else if(req.startsWith("login")){                                
+                                nio.write(userName + " had logged in");
                             }
                             else if(req.startsWith("bet") && req.split("\\|").length == 2){
                                 //System.out.println(BaccaratEngine.bet(req.substring(4)));
@@ -114,7 +115,7 @@ public class clientHandler implements Runnable{
                 } 
             }            
         }
-        catch (Exception e){
+        catch (IOException e){
             e.printStackTrace();
         } 
         finally{

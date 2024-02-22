@@ -19,7 +19,7 @@ public class BaccaratEngine {
     private static File remainingCardsFile = new File("cards.db");    
     private static final int ELEMENTS_PER_ROW = 6;
     
-    public static String login(String input){
+    public static String login(String input){ //input: uSeRnAmE|+ve int
         String output = "";
 
         String[] inputSplitted = input.split("\\|");
@@ -56,7 +56,7 @@ public class BaccaratEngine {
         return output;
     }
 
-    public static String bet(String bet){
+    public static String bet(String bet){//input: "b" or "p"
         String output;
         int betInInt = Integer.parseInt(bet);
         // if(!user.getTotalBet().isEmpty()){
@@ -88,14 +88,17 @@ public class BaccaratEngine {
         return betValid;
     }
 
-    public static String checkWin(String input){
+    public static String checkWin(String input){ //client.card.checkCard in lowercase
         int bet = Integer.parseInt(user.getBet());
+        System.out.println("bet: " + bet);
         int fund = Integer.parseInt(user.getFund());
+        System.out.println("fund: " + fund);
         List <String> fundL = new ArrayList<>();
         List <String> statistic = new ArrayList<>();        
         String deal = user.getDeal();
+        System.out.println("deal: " + deal);
         String output = "";
-
+        System.out.println("input: " + input);
         //load game_history.csv file
         user.setStatisticWin(loadCSVFile());
         statistic = user.getStatisticWin();
@@ -126,7 +129,7 @@ public class BaccaratEngine {
             }            
             else if(input.contains("6-card rule")  && deal.equals("b")){
                 fund += bet/2;            
-                output = "Player win $" + bet + "\nTotal fund : $" + fund;
+                output = "Player win $" + bet / 2 + "\nTotal fund : $" + fund;
             }
             else if(deal.equals("b")){
                 fund += bet;
@@ -136,15 +139,15 @@ public class BaccaratEngine {
         
         user.setStatisticWin(statistic);
         writeCSVFile(statistic);
-        
+        System.out.println("new fund: " + fund);
         user.setFund(Integer.toString(fund));
         fundL.add(user.getFund()); //as writefile required a List<String>
         writeFile(user.getUserFile(), fundL);
-
+        System.out.println("output: " + output);
         return output;
     }
 
-    public static String adjFund(String input){
+    public static String adjFund(String input){ //+ int
         int inputInInt = Integer.parseInt(input);
         int totalFundinInt = Integer.parseInt(user.getFund());
         String output = "";
@@ -153,6 +156,11 @@ public class BaccaratEngine {
         }else{
             user.setFund((Integer.toString(totalFundinInt + inputInInt)));
             output = "Your new fund = " + user.getFund();
+
+            //upadate to file
+            List <String> totalFund = new ArrayList<>();
+            totalFund.add(user.getFund());            
+            writeFile(user.getUserFile(), totalFund); 
         }
         return output;
     }    
@@ -168,7 +176,7 @@ public class BaccaratEngine {
         return cardSet;
     }
 
-    public static List<String> loadDeck(int decksSet){        
+    public static List<String> loadDeck(int decksSet){ //2nd args at serverApp 
         create1cardSet();
         List <String> deck = loadFile(cardFile);
         List <String> fullDeck = shuffleCard(deck, decksSet);              
