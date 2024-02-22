@@ -26,7 +26,7 @@ Modified to allow the server to accept 2 client to play game together but with t
     ```
     java -cp classes sg.edu.nus.iss.baccarat.server.serverApp 12345 4
     ```
-    ## for client (as it use newFixedThreadPool = 2, there is a max of 2 client can connect but both still end up same user even login differently)
+    ## for client (as it use newFixedThreadPool = 2, there is a max of 2 client can connect and run the game concurently but with same card deck)
     ```
     java -cp classes sg.edu.nus.iss.baccarat.client.clientApp localhost:12345
     ```
