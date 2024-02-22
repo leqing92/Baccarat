@@ -14,12 +14,12 @@ import java.util.Random;
 
 public class BaccaratEngine {
 
-    private static userData user = new userData();
-    private static File cardFile = new File("1cardSet.db");
-    private static File remainingCardsFile = new File("cards.db");    
-    private static final int ELEMENTS_PER_ROW = 6;
+    private userData user = new userData();
+    private File cardFile = new File("1cardSet.db");
+    private File remainingCardsFile = new File("cards.db");    
+    private final int ELEMENTS_PER_ROW = 6;
     
-    public static String login(String input){ //input: uSeRnAmE|+ve int
+    public String login(String input){ //input: uSeRnAmE|+ve int
         String output = "";
 
         String[] inputSplitted = input.split("\\|");
@@ -56,7 +56,7 @@ public class BaccaratEngine {
         return output;
     }
 
-    public static String bet(String bet){//input: "b" or "p"
+    public String bet(String bet){//input: "b" or "p"
         String output;
         int betInInt = Integer.parseInt(bet);
         // if(!user.getTotalBet().isEmpty()){
@@ -76,7 +76,7 @@ public class BaccaratEngine {
         return output;
     }
         
-    public static String checkBetValid (){
+    public String checkBetValid (){
         String betValid = "checking valid bet or not; seem like it is out of condition";
         if(Integer.parseInt(user.getFund()) >= Integer.parseInt(user.getBet()) && user.getRemainingCards().size() >= 6){   
             betValid = "true";
@@ -88,7 +88,7 @@ public class BaccaratEngine {
         return betValid;
     }
 
-    public static String checkWin(String input){ //client.card.checkCard in lowercase
+    public String checkWin(String input){ //client.card.checkCard in lowercase
         int bet = Integer.parseInt(user.getBet());
         System.out.println("bet: " + bet);
         int fund = Integer.parseInt(user.getFund());
@@ -147,7 +147,7 @@ public class BaccaratEngine {
         return output;
     }
 
-    public static String adjFund(String input){ //+ int
+    public String adjFund(String input){ //+ int
         int inputInInt = Integer.parseInt(input);
         int totalFundinInt = Integer.parseInt(user.getFund());
         String output = "";
@@ -165,7 +165,7 @@ public class BaccaratEngine {
         return output;
     }    
     
-    public static List<String> create1cardSet(){
+    public List<String> create1cardSet(){
         List<String> cardSet = new ArrayList<>();
         for (int i = 1; i <= 13; i++) {
             for (int j = 1; j <= 4; j++) {
@@ -176,7 +176,7 @@ public class BaccaratEngine {
         return cardSet;
     }
 
-    public static List<String> loadDeck(int decksSet){ //2nd args at serverApp 
+    public List<String> loadDeck(int decksSet){ //2nd args at serverApp 
         create1cardSet();
         List <String> deck = loadFile(cardFile);
         List <String> fullDeck = shuffleCard(deck, decksSet);              
@@ -186,7 +186,7 @@ public class BaccaratEngine {
         return fullDeck;
     }
     
-    private static List <String> shuffleCard(List<String> array, int decksSet)
+    private List <String> shuffleCard(List<String> array, int decksSet)
     {
         int index;
         String temp;
@@ -212,7 +212,7 @@ public class BaccaratEngine {
         return fullDeck;
     }
 
-    public static String initiateCard(String deal){
+    public String initiateCard(String deal){
         List <String> fullDeck = user.getRemainingCards();
         List <String> bCard = new ArrayList<>();
         List <String> pCard = new ArrayList<>();
@@ -238,7 +238,7 @@ public class BaccaratEngine {
         return initialCard;
     }
 
-    public static String drawCard(String input){
+    public String drawCard(String input){
         //get card deck and card combination
         List <String> fullDeck = user.getRemainingCards();
         List <String> bCard = new ArrayList<>();
@@ -269,7 +269,7 @@ public class BaccaratEngine {
         return newCardCombination;
     }
     
-    private static List<String> loadFile(File filepath) {
+    private List<String> loadFile(File filepath) {
         List <String> input = new ArrayList<>();
         
         //try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)))){
@@ -288,7 +288,7 @@ public class BaccaratEngine {
             return input;
         }
         
-    private static void writeFile (File file, List <String> array){        
+    private void writeFile (File file, List <String> array){        
         
         if(!file.exists()){
             try {
@@ -314,7 +314,7 @@ public class BaccaratEngine {
         }
     }
     
-    private static List<String> loadCSVFile() {
+    private List<String> loadCSVFile() {
         File gameHistoryFile = new File("game_history.csv");
 
         List <String> input = new ArrayList<>();            
@@ -335,7 +335,7 @@ public class BaccaratEngine {
         return input;
     }
     
-    private static void writeCSVFile (List <String> array){        
+    private void writeCSVFile (List <String> array){        
         File gameHistoryFile = new File("game_history.csv");
 
         if(!gameHistoryFile.exists()){

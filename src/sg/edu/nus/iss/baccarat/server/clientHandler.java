@@ -37,14 +37,15 @@ public class clientHandler implements Runnable{
                         stop = true;                
                         break;
                     }
-                    else if(req.startsWith("login")&& req.split("\\|").length == 3){   
-                        String response = BaccaratEngine.login(req.substring(6));
+                    else if(req.startsWith("login")&& req.split("\\|").length == 3){
+                        BaccaratEngine gameEngine = new BaccaratEngine();   
+                        String response = gameEngine.login(req.substring(6));
                         String userName = (req.split("\\|"))[1];
                         if(response.contains("negative")){
                             nio.write(response);
                             break;
                         }
-                        BaccaratEngine.loadDeck(decksNo);
+                        gameEngine.loadDeck(decksNo);
                         nio.write(response);
                         
                         while (!stop){ //2nd while loop
@@ -63,16 +64,16 @@ public class clientHandler implements Runnable{
                             }
                             else if(req.startsWith("bet") && req.split("\\|").length == 2){
                                 //System.out.println(BaccaratEngine.bet(req.substring(4)));
-                                nio.write(BaccaratEngine.bet(req.substring(4)));
+                                nio.write(gameEngine.bet(req.substring(4)));
                             }
                             else if(req.startsWith("deal") && req.length() == 6){
-                                String check = BaccaratEngine.checkBetValid(); // to check card deck and user fund
+                                String check = gameEngine.checkBetValid(); // to check card deck and user fund
                                 if(check.equals("true")){
                                     String deal = req.substring(5).toLowerCase();
                                     //System.out.println(deal);
                                     if(deal.equals("p") || deal.equals("b")){
                                         //initiate card
-                                        String responseAfterDeal = BaccaratEngine.initiateCard(deal);
+                                        String responseAfterDeal = gameEngine.initiateCard(deal);
                                         System.out.println(responseAfterDeal);
                                         nio.write(responseAfterDeal);
 
@@ -80,11 +81,11 @@ public class clientHandler implements Runnable{
                                         String reqAfterDeal = nio.read().toLowerCase();
                                         System.out.println(reqAfterDeal);
                                         if(reqAfterDeal.contains("draw card")){
-                                            nio.write(BaccaratEngine.drawCard(reqAfterDeal));
+                                            nio.write(gameEngine.drawCard(reqAfterDeal));
                                             reqAfterDeal = nio.read().toLowerCase();                                        
                                         }
                                         if(reqAfterDeal.contains("wins") || reqAfterDeal.contains("tie")){                                        
-                                            String showFund = BaccaratEngine.checkWin(reqAfterDeal);
+                                            String showFund = gameEngine.checkWin(reqAfterDeal);
                                             System.out.println(showFund);
                                             nio.write(showFund);
                                         }
@@ -94,13 +95,13 @@ public class clientHandler implements Runnable{
                                     }
                                 }else if(check.contains("New card deck is draw.")){
                                     nio.write(check);
-                                    BaccaratEngine.loadDeck(decksNo);
+                                    gameEngine.loadDeck(decksNo);
                                 }else{
                                     nio.write(check);
                                 }
                             }
                             else if(req.startsWith("adjust")){
-                                response = BaccaratEngine.adjFund(req.substring(7));
+                                response = gameEngine.adjFund(req.substring(7));
                                 System.out.println("Fund adjusted");
                                 nio.write(response);
                             }
