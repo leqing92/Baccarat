@@ -2,6 +2,8 @@
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
+## Version 
+
 Modified to allow the server to accept 2 client to play game together but with the same card deck
 
 ## run code - class file
