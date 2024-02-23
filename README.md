@@ -72,9 +72,9 @@ Modified to allow the server to accept 2 client to play game together but with t
 
 ## how to use the .sh file
 1. make sure the two file (junit-4.12.jar & hamcrest-core-1.3.jar) are exist in lib 
-2. run ./compile in git bash to convert all java file to classes file (./compile.sh doesnt work if test file is included) 
+2. run ./compile in git bash to convert all java file to classes file (./compile.sh NOW work if test file is included) 
 3. update the run server and client .sh file and run by ./filename.sh also
-4. 
+4. for the test file, the classpath require "" and :-> ; for window
 
 ## local server to check the javascript importing CSV
 1. upload to vercel
